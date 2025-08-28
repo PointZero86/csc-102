@@ -8,3 +8,4 @@ public class Error1
    }
 }
 
+// Cannot compile because "System.out.println" is mispelled

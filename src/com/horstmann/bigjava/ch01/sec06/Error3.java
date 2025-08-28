@@ -9,3 +9,4 @@ public class Error3
    }
 }
 
+// You cannot divide by zero
