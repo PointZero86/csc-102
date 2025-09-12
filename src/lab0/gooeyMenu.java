@@ -1,7 +1,5 @@
 package lab0;
 import java.util.Scanner;
-import java.util.Arrays;
-import java.util.List;
 
 public class gooeyMenu {
     // Print Menu based on Array
