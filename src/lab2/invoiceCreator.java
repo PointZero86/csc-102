@@ -6,10 +6,10 @@ import java.math.BigDecimal;
  * @version 1.0
  */
 public class invoiceCreator {
-    private String itemName;
-    private BigDecimal unitPrice;
-    private int quantity;
-    private double taxRate;
+    private final String itemName;
+    private final BigDecimal unitPrice;
+    private final int quantity;
+    private final double taxRate;
 
     public invoiceCreator(String itemName, BigDecimal unitPrice, int quantity, double taxRate) {
         this.itemName = itemName;
