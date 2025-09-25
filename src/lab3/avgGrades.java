@@ -1,9 +1,9 @@
 package lab3;
-import javax.swing.*;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.*;
 
 /**
  * Class that allows the user to enter grades and see
@@ -66,7 +66,7 @@ public class avgGrades {
     }
 
     // Example Usage
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("""
                 <-> Jorge Luis Pabon <->
                 <-> CSC 102 <->
@@ -93,14 +93,18 @@ public class avgGrades {
         // 1 = Use A File
         else if (Choice == 1) {
             File TEST_SCORES_FILE = new File("testScores.txt");
-            File USERFILE = new File(JOptionPane.showInputDialog("What File Are You Using (default: testScores.txt)"));
             // Try To Find The Users File
-            try (Scanner fileReader = new Scanner(USERFILE)) {
+            try (Scanner fileReader = new Scanner(TEST_SCORES_FILE)) {
                 while (fileReader.hasNextLine()) {
                     gradeSheet.add(fileReader.nextDouble());
                 }
+                fileReader.close();
             }
-            catch (FileNotFoundException e) {}
+            avgGrades Rubric = new avgGrades(gradeSheet);
+            Rubric.storeWorstBest();
+            double avg = Rubric.calcAverage();
+            JOptionPane.showMessageDialog(null, "Highest: "
+                    + Rubric.getHighest() + "\nLowest: " + Rubric.getLowest() + "\nAverage: " + avg);
         }
     }
 }
