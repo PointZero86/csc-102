@@ -2,38 +2,35 @@
 import java.math.BigDecimal;
 
 /**
- * Allows the creation of a savings account with a balance and interest rate.
+ * Allows the creation of a checking account with a balance and certain limits.
  * Implements the genericAccount interface.
  * @author Jorge Luis Pabon
  * @version 1.0
  */
 
-public class savingsAccount implements genericAccount {
+public class checkingAccount implements genericAccount {
     private BigDecimal balance; // Account Balance
-    private double interestRate; // Account Interest Rate
+    private BigDecimal overdraftLimit; // Limit That A User Can Withdraw To  
 
     /**
-     * Constructor for savingsAccount
+     * Constructor for checkingAccount
      * @param balance initial balance
-     * @param interestRate interest rate
      */
-    public savingsAccount(BigDecimal balance, double interestRate) {
+    public checkingAccount(BigDecimal balance, BigDecimal overdraftLimit) {
         this.balance = balance;
-        this.interestRate = interestRate;
+        this.overdraftLimit = overdraftLimit;
     }
 
     /**
      * Perform updates to the account monthly.
-     * @param interestRate rate to use when calculating interest
-     * @param balance balance of current account
      */
     @Override
     public void monthlyProcessing() {
-        balance = (balance.add(balance.multiply(BigDecimal.valueOf(interestRate))));
+        // Nothing Here..
     }
 
     /**
-     * Allows the user to deposit an amount into a savings account.
+     * Allows the user to deposit an amount into a checking account.
      * @param amount amount to deposit
      * @throws InvalidAmountException 
      */
@@ -48,12 +45,12 @@ public class savingsAccount implements genericAccount {
     }
 
     /**
-     * Allows the user to withdraw an amount from a savings account.
+     * Allows the user to withdraw an amount from a checking account.
      * @param amount amount to withdraw
      */
     @Override
     public void withdraw(BigDecimal amount) throws InvalidAmountException {
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+        if ((balance.subtract(amount)).compareTo(overdraftLimit) <= 0) {
             throw new InvalidAmountException("[InvalidAmountException]: Not A Valid Amount");
         }
         else {
@@ -62,7 +59,7 @@ public class savingsAccount implements genericAccount {
     }
 
     /**
-     * Allows the user to check the balance of a savings account.
+     * Allows the user to check the balance of a checking account.
      * @return current balance
      */
     @Override
