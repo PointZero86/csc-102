@@ -1,0 +1,6 @@
+package lab0;
+
+public interface genericMenu {
+    public int getInput(); // Should Look For Input From The User
+    public void displayMenu(); // Display A Menu To The User
+}
